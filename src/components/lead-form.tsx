@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react";
 import { CheckCircle2, MessageCircle } from "lucide-react";
 import { SERVICE_OPTIONS, SITE } from "@/lib/content";
 import { saveLead } from "@/lib/leads";
-import { submitLead } from "@/lib/whatsapp/leads.server";
+import { submitLead } from "@/lib/whatsapp/submit-lead";
 import { Button } from "@/components/ui/button";
 import { FieldLabel, Input, SelectField, Textarea } from "@/components/ui/input";
 

@@ -3,7 +3,7 @@
 export default defineEventHandler(async (event) => {
   const url = getRequestURL(event);
   const method = event.method;
-  const mod = await import("../../../src/lib/whatsapp/webhook.server");
+  const mod = await import("../../../../src/lib/whatsapp/webhook.server");
   if (method === "GET") {
     const response = mod.verifyWebhook(url);
     setResponseStatus(event, response.status);
