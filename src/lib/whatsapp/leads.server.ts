@@ -1,3 +1,4 @@
+```ts
 import { getSql } from "@/lib/db";
 import { getBrevoConfig } from "@/lib/env.server";
 import { startQualification } from "@/lib/whatsapp/qualify.server";
@@ -21,10 +22,11 @@ async function sendBrevoNotification(lead: LeadRecord) {
   const { apiKey, senderEmail, senderName } = getBrevoConfig();
 
   const recipientEmail =
-    process.env.BREVO_RECIPIENT_EMAIL || "pranayyadav860@gmail.com";
+    process.env.BREVO_RECIPIENT_EMAIL ||
+    "pranayyadav860@gmail.com";
 
   if (!apiKey) {
-    console.warn("[lead] BREVO_API_KEY is not configured");
+    console.error("[lead] BREVO ERROR: API key missing");
 
     return {
       ok: false as const,
@@ -33,7 +35,7 @@ async function sendBrevoNotification(lead: LeadRecord) {
   }
 
   if (!senderEmail) {
-    console.warn("[lead] BREVO_SENDER_EMAIL is not configured");
+    console.error("[lead] BREVO ERROR: sender email missing");
 
     return {
       ok: false as const,
@@ -41,124 +43,134 @@ async function sendBrevoNotification(lead: LeadRecord) {
     };
   }
 
+  console.log("[lead] Sending Brevo email", {
+    sender: senderEmail,
+    recipient: recipientEmail,
+  });
+
   try {
-    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST",
+    const response = await fetch(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        method: "POST",
 
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        "api-key": apiKey,
-      },
-
-      body: JSON.stringify({
-        sender: {
-          name: senderName || "PRAYAVA",
-          email: senderEmail,
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          "api-key": apiKey,
         },
 
-        to: [
-          {
-            email: recipientEmail,
-            name: "PRAYAVA",
+        body: JSON.stringify({
+          sender: {
+            name: senderName || "PRAYAVA",
+            email: senderEmail,
           },
-        ],
 
-        replyTo: {
-          email: lead.email,
-          name: lead.name,
-        },
+          to: [
+            {
+              email: recipientEmail,
+              name: "PRAYAVA",
+            },
+          ],
 
-        subject: `New PRAYAVA lead — ${lead.name}`,
+          replyTo: {
+            email: lead.email,
+            name: lead.name,
+          },
 
-        htmlContent: `
-          <!doctype html>
-          <html>
-            <body
-              style="
-                margin:0;
-                padding:24px;
-                background:#f5f5f5;
-                font-family:Arial,sans-serif;
-                line-height:1.6;
-                color:#222;
-              "
-            >
-              <div
+          subject: `New PRAYAVA lead — ${lead.name}`,
+
+          htmlContent: `
+            <!doctype html>
+            <html>
+              <body
                 style="
-                  max-width:640px;
-                  margin:auto;
-                  background:#ffffff;
-                  padding:32px;
-                  border-radius:16px;
+                  margin:0;
+                  padding:24px;
+                  background:#f5f5f5;
+                  font-family:Arial,sans-serif;
+                  line-height:1.6;
+                  color:#222;
                 "
               >
-                <h2 style="margin-top:0;">
-                  New PRAYAVA Website Lead
-                </h2>
+                <div
+                  style="
+                    max-width:640px;
+                    margin:auto;
+                    background:#ffffff;
+                    padding:32px;
+                    border-radius:16px;
+                  "
+                >
+                  <h2>New PRAYAVA Website Lead</h2>
 
-                <p>
-                  <strong>Name:</strong>
-                  ${escapeHtml(lead.name)}
-                </p>
+                  <p>
+                    <strong>Name:</strong>
+                    ${escapeHtml(lead.name)}
+                  </p>
 
-                <p>
-                  <strong>Email:</strong>
-                  ${escapeHtml(lead.email)}
-                </p>
+                  <p>
+                    <strong>Email:</strong>
+                    ${escapeHtml(lead.email)}
+                  </p>
 
-                <p>
-                  <strong>Phone:</strong>
-                  ${escapeHtml(lead.phone || "—")}
-                </p>
+                  <p>
+                    <strong>Phone:</strong>
+                    ${escapeHtml(lead.phone || "—")}
+                  </p>
 
-                <p>
-                  <strong>Service:</strong>
-                  ${escapeHtml(lead.service || "—")}
-                </p>
+                  <p>
+                    <strong>Service:</strong>
+                    ${escapeHtml(lead.service || "—")}
+                  </p>
 
-                <p>
-                  <strong>Source:</strong>
-                  ${escapeHtml(lead.source)}
-                </p>
+                  <p>
+                    <strong>Source:</strong>
+                    ${escapeHtml(lead.source)}
+                  </p>
 
-                <p>
-                  <strong>Audit Score:</strong>
-                  ${lead.auditScore ?? "—"}
-                </p>
+                  <p>
+                    <strong>Audit Score:</strong>
+                    ${lead.auditScore ?? "—"}
+                  </p>
 
-                <p>
-                  <strong>Recommended Plan:</strong>
-                  ${escapeHtml(lead.recommendedPlan || "—")}
-                </p>
+                  <p>
+                    <strong>Recommended Plan:</strong>
+                    ${escapeHtml(
+                      lead.recommendedPlan || "—",
+                    )}
+                  </p>
 
-                <hr />
+                  <hr />
 
-                <h3>Message</h3>
+                  <h3>Message</h3>
 
-                <p>
-                  ${escapeHtml(lead.message || "—")}
-                </p>
+                  <p>
+                    ${escapeHtml(lead.message || "—")}
+                  </p>
 
-                <hr />
+                  <hr />
 
-                <p style="font-size:13px;color:#666;">
-                  <strong>Lead ID:</strong>
-                  ${escapeHtml(lead.id)}
-                </p>
-              </div>
-            </body>
-          </html>
-        `,
-      }),
-    });
+                  <p style="font-size:13px;color:#666;">
+                    <strong>Lead ID:</strong>
+                    ${escapeHtml(lead.id)}
+                  </p>
+                </div>
+              </body>
+            </html>
+          `,
+        }),
+      },
+    );
+
+    const responseText = await response.text().catch(() => "");
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => "");
-
-      console.error("[lead] Brevo request failed", {
+      console.error("[lead] BREVO ERROR", {
         status: response.status,
-        body: errorText,
+        body: responseText,
+        sender: senderEmail,
+        recipient: recipientEmail,
       });
 
       return {
@@ -167,7 +179,10 @@ async function sendBrevoNotification(lead: LeadRecord) {
       };
     }
 
-    console.log("[lead] Brevo email sent successfully", {
+    console.log("[lead] BREVO SUCCESS", {
+      status: response.status,
+      response: responseText,
+      sender: senderEmail,
       recipient: recipientEmail,
     });
 
@@ -175,7 +190,7 @@ async function sendBrevoNotification(lead: LeadRecord) {
       ok: true as const,
     };
   } catch (error) {
-    console.error("[lead] Brevo request failed", error);
+    console.error("[lead] BREVO REQUEST ERROR", error);
 
     return {
       ok: false as const,
@@ -223,14 +238,19 @@ export async function submitLeadServer(data: LeadInput) {
     id,
   };
 
-  const email = await sendBrevoNotification(lead).catch((error) => {
-    console.error("[lead] Unexpected Brevo error", error);
+  const email = await sendBrevoNotification(lead).catch(
+    (error) => {
+      console.error(
+        "[lead] Unexpected Brevo error",
+        error,
+      );
 
-    return {
-      ok: false as const,
-      reason: "brevo_unexpected_error",
-    };
-  });
+      return {
+        ok: false as const,
+        reason: "brevo_unexpected_error",
+      };
+    },
+  );
 
   let whatsapp: {
     ok: boolean;
@@ -285,3 +305,4 @@ function escapeHtml(value: string) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+```
