@@ -1,0 +1,46 @@
+import { createFileRoute } from "@tanstack/react-router";
+import {
+  ContactBand,
+  FaqSection,
+  HomeHero,
+  IndustriesSection,
+  PricingSection,
+  ProcessSection,
+  ProofStrip,
+  ResultsSection,
+  ServicesPreview,
+  ServicesScrollBar,
+  TestimonialsSection,
+  WhySection,
+} from "@/components/home-sections";
+import { SiteShell } from "@/components/site-chrome";
+
+export const Route = createFileRoute("/")({
+  component: Home,
+  head: () => ({
+    meta: [
+      {
+        title: "PRAYAVA — Digital Marketing, Web Design & SEO in Hyderabad",
+      },
+    ],
+  }),
+});
+
+function Home() {
+  return (
+    <SiteShell>
+      <HomeHero />
+      <ServicesScrollBar />
+      <ProofStrip />
+      <ServicesPreview />
+      <WhySection />
+      <ProcessSection />
+      <IndustriesSection />
+      <ResultsSection />
+      <PricingSection />
+      <TestimonialsSection />
+      <FaqSection />
+      <ContactBand />
+    </SiteShell>
+  );
+}

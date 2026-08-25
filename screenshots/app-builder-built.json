@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "PRAYAVA — Digital Marketing, Web Design & SEO in Hyderabad",
+      "hasCanvas": false,
+      "bodyTextLen": 7039,
+      "bodyTextHash": "47bada2e26466fd996538077a4f2b898cb1c25896ef7dfacebb081c23367e8ef",
+      "bodyTextPrefix": "PRAYAVA Home Services How it works Pricing Audit About Get free ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "PRAYAVA — Digital Marketing, Web Design & SEO in Hyderabad",
+      "hasCanvas": false,
+      "bodyTextLen": 6890,
+      "bodyTextHash": "592768878ff032d271f4b18bd583245b0f392fc4ddaea3eeb5fcdb76ae1654eb",
+      "bodyTextPrefix": "PRAYAVA DIGITAL GROWTH PARTNER Turn your digital presence into r",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}
