@@ -20,66 +20,133 @@ type LeadRecord = LeadInput & {
 async function sendBrevoNotification(lead: LeadRecord) {
   const { apiKey, senderEmail, senderName } = getBrevoConfig();
 
+  const recipientEmail =
+    process.env.BREVO_RECIPIENT_EMAIL || "pranayyadav860@gmail.com";
+
   if (!apiKey) {
     console.warn("[lead] BREVO_API_KEY is not configured");
+
     return {
       ok: false as const,
       reason: "missing_brevo_key",
     };
   }
 
+  if (!senderEmail) {
+    console.warn("[lead] BREVO_SENDER_EMAIL is not configured");
+
+    return {
+      ok: false as const,
+      reason: "missing_brevo_sender",
+    };
+  }
+
   try {
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
+
       headers: {
         accept: "application/json",
         "content-type": "application/json",
         "api-key": apiKey,
       },
+
       body: JSON.stringify({
         sender: {
           name: senderName || "PRAYAVA",
           email: senderEmail,
         },
+
         to: [
           {
-            email: senderEmail,
-            name: senderName || "PRAYAVA",
+            email: recipientEmail,
+            name: "PRAYAVA",
           },
         ],
+
         replyTo: {
           email: lead.email,
           name: lead.name,
         },
+
         subject: `New PRAYAVA lead — ${lead.name}`,
+
         htmlContent: `
           <!doctype html>
           <html>
-            <body style="font-family:Arial,sans-serif;line-height:1.6;color:#222">
-              <h2>New PRAYAVA Website Lead</h2>
+            <body
+              style="
+                margin:0;
+                padding:24px;
+                background:#f5f5f5;
+                font-family:Arial,sans-serif;
+                line-height:1.6;
+                color:#222;
+              "
+            >
+              <div
+                style="
+                  max-width:640px;
+                  margin:auto;
+                  background:#ffffff;
+                  padding:32px;
+                  border-radius:16px;
+                "
+              >
+                <h2 style="margin-top:0;">
+                  New PRAYAVA Website Lead
+                </h2>
 
-              <p><strong>Name:</strong> ${escapeHtml(lead.name)}</p>
-              <p><strong>Email:</strong> ${escapeHtml(lead.email)}</p>
-              <p><strong>Phone:</strong> ${escapeHtml(lead.phone || "—")}</p>
-              <p><strong>Service:</strong> ${escapeHtml(lead.service || "—")}</p>
-              <p><strong>Source:</strong> ${escapeHtml(lead.source)}</p>
-              <p><strong>Audit Score:</strong> ${
-                lead.auditScore ?? "—"
-              }</p>
-              <p><strong>Recommended Plan:</strong> ${
-                escapeHtml(lead.recommendedPlan || "—")
-              }</p>
+                <p>
+                  <strong>Name:</strong>
+                  ${escapeHtml(lead.name)}
+                </p>
 
-              <hr />
+                <p>
+                  <strong>Email:</strong>
+                  ${escapeHtml(lead.email)}
+                </p>
 
-              <h3>Message</h3>
-              <p>${escapeHtml(lead.message || "—")}</p>
+                <p>
+                  <strong>Phone:</strong>
+                  ${escapeHtml(lead.phone || "—")}
+                </p>
 
-              <hr />
+                <p>
+                  <strong>Service:</strong>
+                  ${escapeHtml(lead.service || "—")}
+                </p>
 
-              <p>
-                <strong>Lead ID:</strong> ${escapeHtml(lead.id)}
-              </p>
+                <p>
+                  <strong>Source:</strong>
+                  ${escapeHtml(lead.source)}
+                </p>
+
+                <p>
+                  <strong>Audit Score:</strong>
+                  ${lead.auditScore ?? "—"}
+                </p>
+
+                <p>
+                  <strong>Recommended Plan:</strong>
+                  ${escapeHtml(lead.recommendedPlan || "—")}
+                </p>
+
+                <hr />
+
+                <h3>Message</h3>
+
+                <p>
+                  ${escapeHtml(lead.message || "—")}
+                </p>
+
+                <hr />
+
+                <p style="font-size:13px;color:#666;">
+                  <strong>Lead ID:</strong>
+                  ${escapeHtml(lead.id)}
+                </p>
+              </div>
             </body>
           </html>
         `,
@@ -100,6 +167,10 @@ async function sendBrevoNotification(lead: LeadRecord) {
       };
     }
 
+    console.log("[lead] Brevo email sent successfully", {
+      recipient: recipientEmail,
+    });
+
     return {
       ok: true as const,
     };
@@ -118,11 +189,6 @@ export async function submitLeadServer(data: LeadInput) {
 
   const sql = await getSql();
 
-  /*
-   * Save the lead first.
-   * Notification failures should not prevent the lead
-   * from being stored successfully.
-   */
   await sql`
     INSERT INTO leads (
       id,
@@ -157,9 +223,6 @@ export async function submitLeadServer(data: LeadInput) {
     id,
   };
 
-  /*
-   * Send email notification.
-   */
   const email = await sendBrevoNotification(lead).catch((error) => {
     console.error("[lead] Unexpected Brevo error", error);
 
@@ -169,9 +232,6 @@ export async function submitLeadServer(data: LeadInput) {
     };
   });
 
-  /*
-   * Start WhatsApp qualification.
-   */
   let whatsapp: {
     ok: boolean;
     reason?: string;
@@ -190,10 +250,17 @@ export async function submitLeadServer(data: LeadInput) {
 
       whatsapp = {
         ok: Boolean(result?.ok),
-        ...(result?.ok ? {} : { reason: "whatsapp_failed" }),
+        ...(result?.ok
+          ? {}
+          : {
+              reason: "whatsapp_failed",
+            }),
       };
     } catch (error) {
-      console.error("[lead] WhatsApp qualification failed", error);
+      console.error(
+        "[lead] WhatsApp qualification failed",
+        error,
+      );
 
       whatsapp = {
         ok: false,
