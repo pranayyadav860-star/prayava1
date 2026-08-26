@@ -459,7 +459,7 @@ export const SERVICE_OPTIONS = [
 export const NAV = [
   { label: "Home", to: "/" as const, hash: undefined as string | undefined },
   { label: "Services", to: "/services" as const, hash: undefined as string | undefined },
-  { label: "How it works", to: "/" as const, hash: "process" },
+  
   { label: "Pricing", to: "/pricing" as const, hash: undefined as string | undefined },
   { label: "Audit", to: "/audit" as const, hash: undefined as string | undefined },
   { label: "About", to: "/about" as const, hash: undefined as string | undefined },

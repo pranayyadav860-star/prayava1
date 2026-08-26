@@ -148,9 +148,7 @@ export function SiteFooter() {
             <Link to="/about" className="text-sm text-dark-muted transition-colors hover:text-dark-fg">
               About
             </Link>
-            <Link to="/" hash="process" className="text-sm text-dark-muted transition-colors hover:text-dark-fg">
-              How it works
-            </Link>
+            
             <Link to="/pricing" className="text-sm text-dark-muted transition-colors hover:text-dark-fg">
               Pricing
             </Link>
