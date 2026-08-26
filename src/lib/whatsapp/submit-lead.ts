@@ -11,9 +11,14 @@ export type LeadInput = {
   recommendedPlan?: string;
 };
 
-export const submitLead = createServerFn({ method: "POST" })
+export const submitLead = createServerFn({
+  method: "POST",
+})
   .validator((data: LeadInput) => data)
   .handler(async ({ data }) => {
-    const { submitLeadServer } = await import("./leads.server");
-    return submitLeadServer(data);
+    const { sendLeadEmails } = await import(
+      "./leads.server"
+    );
+
+    return sendLeadEmails(data);
   });
