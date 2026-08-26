@@ -56,7 +56,7 @@ export const SERVICES: Service[] = [
     image: "/images/services/digital-marketing.jpg",
   },
   {
-    slug: "web-development",
+    slug: "website-design-development-hyderabad",
     number: "02",
     name: "Web Development",
     lever: "Convert",
@@ -78,7 +78,7 @@ export const SERVICES: Service[] = [
     image: "/images/services/web-development.jpg",
   },
   {
-    slug: "branding-design",
+    slug: "branding-visual-identity-design",
     number: "03",
     name: "Branding & Design",
     lever: "Position",
@@ -100,7 +100,7 @@ export const SERVICES: Service[] = [
     image: "/images/services/branding-design.jpg",
   },
   {
-    slug: "seo-analytics",
+    slug: "seo-services-hyderabad",
     number: "04",
     name: "SEO & Analytics",
     lever: "Get Found",
@@ -122,7 +122,7 @@ export const SERVICES: Service[] = [
     image: "/images/services/seo-analytics.jpg",
   },
   {
-    slug: "social-media-marketing",
+    slug: "social-media-marketing-instagram",
     number: "05",
     name: "Social Media Marketing",
     lever: "Engage",
@@ -144,7 +144,7 @@ export const SERVICES: Service[] = [
     image: "/images/services/social-media.jpg",
   },
   {
-    slug: "ai-solutions",
+    slug: "ai-chatbots-marketing-automation",
     number: "06",
     name: "AI Solutions",
     lever: "Automate",
@@ -166,7 +166,7 @@ export const SERVICES: Service[] = [
     image: "/images/services/ai-solutions.jpg",
   },
   {
-    slug: "google-paid-ads",
+    slug: "google-ads-management-hyderabad",
     number: "07",
     name: "Google & Paid Ads",
     lever: "Accelerate",

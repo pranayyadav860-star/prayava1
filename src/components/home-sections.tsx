@@ -54,14 +54,14 @@ export function HomeHero() {
             Digital growth partner
           </div>
 
-          <h1 className="mt-6 font-display text-[clamp(2.6rem,6vw,4.6rem)] leading-[0.98] text-dark-fg">
-            Turn your digital presence into{" "}
-            <span className="text-gradient">real growth.</span>
+          <h1 className="mt-6 font-display text-[clamp(2.6rem,6vw,3.6rem)] leading-[0.98] text-dark-fg">
+            Digital Marketing & Web Design Agency{" "}
+            <span className="text-gradient">in Hyderabad.</span>
           </h1>
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-dark-muted lg:text-lg">
-            PRAYAVA builds websites, SEO systems and performance campaigns that
-            help businesses get discovered, trusted and chosen.
+            We build websites, run SEO and run ad campaigns that help Hyderabad
+businesses get found on Google, win trust, and turn visitors into customers.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -104,7 +104,7 @@ export function HomeHero() {
           <div className="relative overflow-hidden rounded-2xl border border-dark-fg/10 bg-dark-fg/6 p-2.5 shadow-dark">
             <img
               src="/images/prayava-hero.jpg"
-              alt="PRAYAVA digital marketing, web development and SEO growth strategy"
+              alt="Best digital marketing agency for business growth in Hyderabad"
               className="aspect-[5/4] w-full rounded-xl object-cover outline outline-1 -outline-offset-1 outline-dark-fg/10"
             />
           </div>
@@ -205,7 +205,7 @@ export function ServicesScrollBar() {
               <span className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-dark-fg/10 bg-dark-fg/8">
                 <img
                   src={s.image}
-                  alt=""
+                  alt="Google Ads management for local businesses"
                   className="size-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </span>
@@ -309,12 +309,12 @@ export function ServicesPreview() {
         <SectionHead
           kicker="What we do"
           title={
-            <>
-              Solutions that drive{" "}
-              <span className="text-gradient-light">real growth</span>
-            </>
+            <h2>
+              Digital Marketing Services {" "}
+              <span className="text-gradient-light">We Offer</span>
+            </h2>
           }
-          copy="From strategy to execution, connected digital solutions that help your business get found on Google and turn visitors into paying customers."
+          copy="Usually it's just one thing holding you back — a site nobody finds, or ads burning money with no calls. We find what's broken, then fix it."
         />
 
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
@@ -454,13 +454,13 @@ export function IndustriesSection() {
           kicker="Who we help"
           title={
             <>
-              Built for{" "}
+              Digital Marketing for{" "}
               <span className="text-gradient-light">
-                every kind of business
+                 Local Businesses
               </span>
             </>
           }
-          copy="Whatever you sell, we build a plan that fits your industry and your customers."
+          copy="A clinic need local search. A restaurant need reviews. A shop need customers. We build the plan how your customers actually decide."
         />
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -502,13 +502,13 @@ export function ResultsSection() {
           kicker="Real client work"
           title={
             <>
-              Real work.{" "}
+              Real Websites We've Built{" "}
               <span className="text-gradient">
-                Real impact.
+                for Businesses
               </span>
             </>
           }
-          copy="A few of the businesses we've built websites, e-commerce stores, local SEO and landing pages for — real projects, not just numbers."
+          copy="We show real work, not just talk. Click any project below and watch it live — now JSK shows up when people search for uPVC windows."
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -608,13 +608,13 @@ export function PricingSection({
           kicker="Website packages"
           title={
             <>
-              Choose the right{" "}
+              Website Design Packages {" "}
               <span className="text-gradient-light">
-                growth package
+                & Pricing
               </span>
             </>
           }
-          copy="Flexible website packages designed for businesses at different stages of growth."
+          copy="Starter is a simple site to get you online. Growth helps you to find you on Google. Pro sets up everything so you never rebuild again soon."
         />
 
         <div className="mt-10 grid items-stretch gap-5 md:grid-cols-3">
@@ -743,13 +743,13 @@ export function TestimonialsSection() {
           kicker="Client love"
           title={
             <>
-              What our clients{" "}
+              Real Feedback{" "}
               <span className="text-gradient-light">
-                say about us
+                Trusted by Businesses
               </span>
             </>
           }
-          copy="A few words from the real businesses featured in our portfolio above."
+          copy="Building websites, running SEO and managing ads — to help businesses get found on Google and gain new customers."
         />
       </div>
 
@@ -936,17 +936,15 @@ export function ContactBand() {
                 Ready to grow?
               </p>
 
-              <h2 className="mt-3 font-display text-[clamp(1.9rem,4vw,3rem)]">
-                Let's grow your business{" "}
+              <h3 className="mt-3 font-display text-[clamp(1.9rem,4vw,3rem)]">
+                Time to Grow {" "}
                 <span className="text-gradient">
-                  together.
+                  Together.
                 </span>
-              </h2>
+              </h3>
 
               <p className="mt-4 max-w-md text-sm leading-relaxed text-dark-muted">
-                Tell us what you're building and we'll turn
-                your idea into a focused digital growth plan —
-                free, no obligation.
+                "Tell us what you need. Get a free 30-minute strategy call, an honest growth plan, and guaranteed reply within 24 hours."
               </p>
 
               <ul className="mt-6 flex flex-col gap-2 text-sm text-dark-muted">
