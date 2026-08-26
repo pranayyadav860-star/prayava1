@@ -448,7 +448,7 @@ export function ProcessSection() {
 
 export function IndustriesSection() {
   return (
-    <section id="industries" className="py-20">
+    <section id="industries" className="py-10">
       <div className="page">
         <SectionHead
           kicker="Who we help"
@@ -562,85 +562,171 @@ export function ResultsSection() {
 /* =========================================================
    PRICING
    ========================================================= */
-
 export function PricingSection({
   id = "pricing",
 }: {
   id?: string;
 }) {
+  const HOME_PLANS = [
+    {
+      id: "starter",
+      name: "Starter",
+      pages: "Upto 4 pages",
+      desc: "A clean, fast website foundation for small businesses.",
+      support: "25 days",
+      revisions: "1 round",
+      delivery: "2 days",
+      popular: false,
+    },
+    {
+      id: "growth",
+      name: "Growth",
+      pages: "Upto 6 pages",
+      desc: "A stronger website built for visibility, leads and business growth.",
+      support: "45 days",
+      revisions: "2 rounds",
+      delivery: "6 days",
+      popular: true,
+    },
+    {
+      id: "pro",
+      name: "Pro",
+      pages: "Upto 10 pages",
+      desc: "A complete website and SEO foundation for growth-focused businesses.",
+      support: "2 months",
+      revisions: "4 rounds",
+      delivery: "12 days",
+      popular: false,
+    },
+  ];
+
   return (
     <section id={id} className="py-20">
       <div className="page">
+
         <SectionHead
-          kicker="Simple pricing"
+          kicker="Website packages"
           title={
             <>
-              Plans that{" "}
+              Choose the right{" "}
               <span className="text-gradient-light">
-                fit your budget
+                growth package
               </span>
             </>
           }
-          copy="Start small and grow — every plan can be customized to what your business actually needs."
+          copy="Flexible website packages designed for businesses at different stages of growth."
         />
 
         <div className="mt-10 grid items-stretch gap-5 md:grid-cols-3">
-          {PLANS.map((p, i) => (
-            <Reveal key={p.id} delay={i * 70}>
-              <article
-                className={cn(
-                  "relative flex h-full min-h-[420px] flex-col rounded-2xl bg-card p-8 shadow-card",
-                  p.popular &&
-                    "border-2 border-primary/40 shadow-card-hover",
-                )}
+          {HOME_PLANS.map((plan, i) => (
+            <Reveal key={plan.id} delay={i * 70}>
+              <Link
+                to="/pricing"
+                className="group block h-full"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="font-display text-2xl">
-                    {p.name}
-                  </h3>
+                <article
+                  className={cn(
+                    "relative flex h-full min-h-[330px] flex-col rounded-2xl bg-card p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover",
+                    plan.popular &&
+                      "border-2 border-primary/40",
+                  )}
+                >
 
-                  {p.popular && (
-                    <span className="shrink-0 rounded-full bg-primary px-3 py-1 text-[10px] font-extrabold tracking-wide text-dark-fg uppercase">
-                      Most popular
+                  {/* POPULAR */}
+
+                  {plan.popular && (
+                    <span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-[10px] font-extrabold tracking-wide text-dark-fg uppercase">
+                      ★ Most Popular
                     </span>
                   )}
-                </div>
 
-                <p className="mt-2 text-sm text-muted">
-                  {p.desc}
-                </p>
+                  {/* HEADER */}
 
-                <ul className="mt-6 flex flex-1 flex-col gap-3">
-                  {p.items.map((item) => (
-                    <li key={item} className="flex gap-2.5 text-sm">
-                      <Check className="mt-0.5 size-4 shrink-0 text-accent" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="font-display text-2xl">
+                        {plan.name}
+                      </h3>
 
-                <Button
-                  asChild
-                  variant={p.popular ? "primary" : "outline"}
-                  className="mt-8 w-full"
-                  size="lg"
-                >
-                  <Link
-                    to="/contact"
-                    search={{ plan: p.name }}
+                      <p className="mt-1 text-xs font-semibold text-primary">
+                        {plan.pages}
+                      </p>
+                    </div>
+
+                    <ArrowRight
+                      className="size-4 text-muted transition-transform group-hover:translate-x-1 group-hover:text-primary"
+                    />
+                  </div>
+
+                  {/* SHORT DESCRIPTION */}
+
+                  <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
+                    {plan.desc}
+                  </p>
+
+                  {/* PLAN DETAILS */}
+
+                  <div className="mt-auto grid grid-cols-3 gap-2 border-t border-line pt-6 text-center">
+
+                    <div>
+                      <strong className="block text-sm">
+                        {plan.delivery}
+                      </strong>
+
+                      <span className="text-[10px] text-muted">
+                        Delivery
+                      </span>
+                    </div>
+
+                    <div>
+                      <strong className="block text-sm">
+                        {plan.revisions}
+                      </strong>
+
+                      <span className="text-[10px] text-muted">
+                        Revisions
+                      </span>
+                    </div>
+
+                    <div>
+                      <strong className="block text-sm">
+                        {plan.support}
+                      </strong>
+
+                      <span className="text-[10px] text-muted">
+                        Support
+                      </span>
+                    </div>
+
+                  </div>
+
+                  {/* CTA */}
+
+                  <div
+                    className={cn(
+                      "mt-6 flex w-full items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-all",
+                      plan.popular
+                        ? "bg-primary text-dark-fg group-hover:bg-accent"
+                        : "border border-line bg-bg group-hover:border-primary group-hover:bg-primary group-hover:text-dark-fg",
+                    )}
                   >
-                    Get a free quote
-                  </Link>
-                </Button>
-              </article>
+                    View package details
+
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+
+                </article>
+              </Link>
             </Reveal>
           ))}
         </div>
+
+        
+
       </div>
     </section>
   );
 }
-
 /* =========================================================
    TESTIMONIALS
    ========================================================= */
@@ -650,7 +736,7 @@ export function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="overflow-hidden bg-primary-soft/35 py-20"
+      className="overflow-hidden bg-primary-soft/35 py-10"
     >
       <div className="page">
         <SectionHead
