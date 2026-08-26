@@ -1,4 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { HomeLeadPopup } from "@/components/home-popup";
 import {
   ContactBand,
   FaqSection,
@@ -41,6 +43,7 @@ function Home() {
       <TestimonialsSection />
       <FaqSection />
       <ContactBand />
+       <HomeLeadPopup />
     </SiteShell>
   );
 }

@@ -69,9 +69,13 @@ export function SiteHeader() {
       )}
     >
       <div className="page flex h-[72px] items-center gap-6">
-        <Link to="/" className="shrink-0" aria-label="PRAYAVA home">
-          <BrandLockup />
-        </Link>
+        <Link
+  to="/"
+  className="flex h-[72px] w-[220px] shrink-0 items-center sm:w-[230px]"
+  aria-label="PRAYAVA home"
+>
+  <BrandLockup className="h-auto w-[220px] sm:w-[230px]" />
+</Link>
         <nav className="ml-auto hidden items-center gap-7 lg:flex">
           <NavLinks />
         </nav>
