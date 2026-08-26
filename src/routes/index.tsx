@@ -30,11 +30,11 @@ function Home() {
   return (
     <SiteShell>
       <HomeHero />
-      <ServicesScrollBar />
       <ProofStrip />
+      <ServicesScrollBar />
+      
       <ServicesPreview />
-      <WhySection />
-      <ProcessSection />
+      
       <IndustriesSection />
       <ResultsSection />
       <PricingSection />

@@ -25,11 +25,15 @@
   --color-dark: #07111F;
   --color-dark-2: #0B1B33;
 
+  /* Dark section text */
+  --color-dark-fg: #F8FAFC;
+  --color-dark-muted: #CBD5E1;
+
   /* Soft backgrounds */
   --color-primary-soft: #ECFEFF;
   --color-accent-soft: #ECFEFF;
 
-  /* Focus / form ring */
+  /* Focus */
   --color-ring: #0891B2;
 
   /* ========================================
@@ -128,7 +132,7 @@
   }
 
   /* ======================================
-     GRID / BACKGROUND PATTERN
+     GRID BACKGROUND
      ====================================== */
 
   .grid-fade {
@@ -148,10 +152,11 @@
 
   /* ======================================
      HERO
-     Navy + Cyan premium gradient
      ====================================== */
 
   .hero-wash {
+    color: var(--color-dark-fg);
+
     background:
       radial-gradient(
         circle at 82% 18%,
@@ -169,6 +174,29 @@
         #0B1B33 52%,
         #07111F 100%
       );
+  }
+
+  /* Hero headings */
+  .hero-wash h1,
+  .hero-wash h2,
+  .hero-wash h3,
+  .hero-wash h4 {
+    color: #F8FAFC;
+  }
+
+  /* Hero paragraphs */
+  .hero-wash p {
+    color: #CBD5E1;
+  }
+
+  /* Hero links */
+  .hero-wash a {
+    color: #22D3EE;
+  }
+
+  /* Hero labels */
+  .hero-wash .text-accent {
+    color: #22D3EE;
   }
 
   /* ======================================
@@ -240,7 +268,7 @@
 }
 
 /* ========================================
-   ACCESSIBILITY / REDUCED MOTION
+   REDUCED MOTION
    ======================================== */
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,4 +1,4 @@
-```ts
+
 import { getSql } from "@/lib/db";
 import { getBrevoConfig } from "@/lib/env.server";
 import { startQualification } from "@/lib/whatsapp/qualify.server";
@@ -305,4 +305,4 @@ function escapeHtml(value: string) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
-```
+
